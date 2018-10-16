@@ -94,19 +94,46 @@ public class SLRTable {
 			//print ith row of actions
 			for (Token t : acciones.get(i).tl) {
 				if(t.value == null)
-					System.out.print("   ");
+					System.out.print("|   |");
 				else
-					System.out.print(t.tclass+t.value + " ");
+					System.out.print("|"+t.tclass+t.value + " |");
 			}
 			//prtnt ith row of gotos
 			for (Token t : gotos.get(i).tl) {
 				if(t.value == null)
-					System.out.print("   ");
+					System.out.print("|   |");
 				else
-					System.out.print(t.value+"  ");
+					System.out.print("|"+t.value+"  |");
 			}
 			System.out.println();
 		}
 	}
-	
+	public Token getAction(int i, String s) 
+	{
+		int columna = terminales.indexOfValue(s);
+		return acciones.get(i).tl.get(columna);
+	}
+	public TokenList getRule(int i)
+	{
+		try {
+			return g.grammar.get(i-1);
+		}
+		catch(Exception e) 
+		{
+			System.out.println("Error no aceptada");
+			return null;
+		}
+	}
+	public int getGoto(int i, String s) 
+	{
+		try {
+			int columna = noTerminales.indexOfValue(s);
+			return Integer.parseInt(gotos.get(i).tl.get(columna).value);
+		}
+		catch(Exception e) 
+		{
+			System.out.println("Error, no aceptada");
+			return -1;
+		}
+	}
 }

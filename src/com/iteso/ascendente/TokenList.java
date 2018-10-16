@@ -14,5 +14,14 @@ public class TokenList {
 	{
 		this.tl = tl;
 	}
-	
+	public int indexOfValue(String val) 
+	{
+		int res = 0;
+		for (Token token : tl) {
+			if(token.value.equals(val))
+				return res;
+			res++;
+		}
+		return -1;
+	}
 }
